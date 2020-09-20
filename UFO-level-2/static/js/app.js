@@ -44,19 +44,39 @@ button.on("click", function() {
 // Prevent the page from refreshing
   d3.event.preventDefault();
 
-// Get the value property of the input element
-  var input = d3.select("#input").property("value");
-
+// Get the value property for each input element
+  var inputDate = d3.select("#datetime").property("value");
+  var inputCity = d3.select("#city").property("value");
+  var inputState = d3.select("#state").property("value");
+  var inputCountry = d3.select("#country").property("value");
+  var inputShape = d3.select("#shape").property("value");
   // var input = inp.property("value");
 
-  console.log(input);
+  // console.log(input);
+  var filteredData = tableData
+// Filter for matches to the date entered only if there is an input
+  if (inputDate !== ""){
+    filteredData = filteredData.filter(match => match.datetime === inputDate);
+  }
+  if (inputCity !== ""){
+  filteredData = filteredData.filter(match => match.city === inputCity);
+  }
+  if (inputState !== ""){
+  filteredData = filteredData.filter(match => match.state === inputState);
+  }
+  if (inputCountry !== ""){
+  filteredData = filteredData.filter(match => match.country === inputCountry);
+  }
+  if (inputShape !== ""){
+  filteredData = filteredData.filter(match => match.shape === inputShape);
+  }
 
-// Filter for matches to the date entered 
-  var filteredData = tableData.filter(match => match.datetime === input ||
-    match.city === input ||
-    match.state === input ||
-    match.country === input ||
-    match.shape === input);
+  // filteredData = filteredData.filter(match => match.datetime === inputDate != null)
+  //                            .filter(match => match.city === inputCity != null)
+  //                            .filter(match => match.state === inputState != null)
+  //                            .filter(match => match.country === inputCountry != null)
+  //                            .filter(match => match.shape === inputShape != null);
+
 
 // Display the filtered dataset
   filteredData.forEach((match) => {
